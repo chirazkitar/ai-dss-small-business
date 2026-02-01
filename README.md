@@ -56,7 +56,11 @@ Synthetic data allows full control over feature design while preserving realisti
 ## Project Structure
 ai-dss-small-business/
 ├── data/
+│   ├── raw/
+│   │   └── small_business_sales.csv
+    └──`generate_synthetic_data.py` → Synthetic data generator
 ├── notebooks/
+│   └── `01_synthetic_data_explained.ipynb` → Step-by-step explanation
 ├── src/
 ├── app/
 ├── README.md
