@@ -1,8 +1,9 @@
 import joblib
 import pandas as pd
-import sys
+import os
 
-MODEL_PATH = "../models/revenue_prediction_pipeline.pkl"
+MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          "models", "revenue_prediction_pipeline.pkl")
 
 def load_model() :
     return joblib.load(MODEL_PATH)
