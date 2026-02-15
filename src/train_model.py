@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import joblib
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 from data_loader import load_data, split_data
@@ -7,10 +8,10 @@ from preprocessing import build_preprocessor
 from models import build_regression_pipeline
 
 
-def main():
+def train_model():
 
     #Load data
-    data_path = os.path.join("..", "data", "raw", "synthetic_revenue_data.csv")
+    data_path = os.path.join("..", "data", "raw", "small_business_sales.csv")
     df = load_data(data_path)
 
     #Split
@@ -51,6 +52,11 @@ def main():
     print(f"MAE: {mae:.2f}")
     print(f"RMSE: {rmse:.2f}")
 
+    #Save Model
+    model_path = os.path.join("..", "models", "revenue_prediction_pipeline.pkl")
+    joblib.dump(model_pipeline, model_path)
+    
+    return model_pipeline
 
 if __name__ == "__main__":
-    main()
+    train_model()
