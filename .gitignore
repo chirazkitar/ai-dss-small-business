@@ -4,3 +4,4 @@ env/
 *.pkl
 *.log
 .ipynb_checkpoints/
+docs/

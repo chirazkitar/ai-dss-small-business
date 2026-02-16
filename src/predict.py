@@ -1,6 +1,8 @@
 import joblib
 import pandas as pd
 import os
+from src.recommend import classify_performance, generate_strategy
+from src.explain import generate_summary
 
 MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                           "models", "revenue_prediction_pipeline.pkl")
@@ -12,7 +14,17 @@ def predict(input_data: dict):
     model = load_model()
     df=pd.DataFrame([input_data])
     prediction = model.predict(df)
-    return prediction[0]
+    predicted_value = prediction[0]
+    tier = classify_performance(predicted_value)
+    strategy = generate_strategy(tier)
+    summary = generate_summary(predicted_value, tier, strategy)
+    
+    return {
+    "predicted_revenue": float(predicted_value),
+    "performance_tier": tier,
+    "strategy": strategy,
+    "summary": summary
+    }
 
 if __name__ == "__main__":
     sample_input = {
